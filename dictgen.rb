@@ -1,6 +1,6 @@
 #load 'inc/params.inc.rb'
 #load 'inc/functions.inc.rb'
-MAB_TXT = '../mab/mab4DS.txt'
+MAB_TXT = './mab/mab4DS.txt'
 BEG = '###'											#parameter: sign that indicates begin of set of data	
 NUM = 4												#parameter: length of field name
 

@@ -1,6 +1,6 @@
 #load 'inc/params.inc.rb'
 #load 'inc/functions.inc.rb'
-MAB_TXT = '../mab/mab4DS.txt'
+MAB_TXT = './mab/mab4DS.txt'
 BEG = '###'											#parameter: sign that indicates begin of set of data	
 NUM = 4												#parameter: length of field name
 
@@ -28,8 +28,10 @@ end
 #combine
 nv = Array.new
 n = field_names.count {|b| /^#{BEG}/.match(b)}
-#puts field_names.count {|b| /^#{BEG}/.match(b)}
-#puts field_names.count do |b| /^#{BEG}/.match(b) end
+puts field_names.count {|b| /^#{BEG}/.match(b)}
+
+n = field_names.count do |b| /^#{BEG}/.match(b) end 
+puts n
 
 
 arr = Array.new
