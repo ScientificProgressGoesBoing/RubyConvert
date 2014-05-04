@@ -25,10 +25,6 @@ end
 #combine
 nv = Array.new
 n = field_names.count {|b| /^#{BEG}/.match(b)}
-# puts field_names.count {|b| /^#{BEG}/.match(b)}
-
-# n = field_names.count do |b| /^#{BEG}/.match(b) end 
-# puts n
 
 
 arr = Array.new
@@ -53,10 +49,13 @@ dict_file = File.readlines(DICT_TXT)
 
 dict = Array.new
 dict_file.each do |line|
-	dict.push({line.gsub(/(^.{4})(.*$)/, '\1').strip => line.gsub(/(^.{4}\s*#{DICT_SEP})(.*$)/, '\2').strip})
+	dict.push({line.gsub(/(^.{#{NUM}})(.*$)/, '\1').strip => line.gsub(/(^.{#{NUM}}\s*#{DICT_SEP})(.*$)/, '\2').strip})
 end
 
-p dict
+puts dict
+
+#convert
+
 
 
 
