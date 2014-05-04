@@ -1,8 +1,5 @@
-#load 'inc/params.inc.rb'
+load 'inc/params.inc.rb'
 #load 'inc/functions.inc.rb'
-MAB_TXT = './mab/mab4DS.txt'
-BEG = '###'											#parameter: sign that indicates begin of set of data	
-NUM = 4												#parameter: length of field name
 
 
 #read database from file
@@ -28,17 +25,17 @@ end
 #combine
 nv = Array.new
 n = field_names.count {|b| /^#{BEG}/.match(b)}
-puts field_names.count {|b| /^#{BEG}/.match(b)}
+# puts field_names.count {|b| /^#{BEG}/.match(b)}
 
-n = field_names.count do |b| /^#{BEG}/.match(b) end 
-puts n
+# n = field_names.count do |b| /^#{BEG}/.match(b) end 
+# puts n
 
 
 arr = Array.new
 i = 0
 k = 0
 for j in 0..field_names.count do
-	if /^#{BEG}/.match(field_names[j]) != nil then
+	if /^#{BEG}/.match(field_names[j]) then
 		i += 1 unless k == 0
 		arr[i] = Array.new
 		arr[i].push({field_names[j] => field_values[j]})
@@ -47,9 +44,20 @@ for j in 0..field_names.count do
 	end
 	k +=1
 end
+i = nil
+k = nil
 
 
 #read dictionary from file
+dict_file = File.readlines(DICT_TXT)
+
+dict = Array.new
+dict_file.each do |line|
+	dict.push({line.gsub(/(^.{4})(.*$)/, '\1').strip => line.gsub(/(^.{4}\s*#{DICT_SEP})(.*$)/, '\2').strip})
+end
+
+p dict
+
 
 
 #write result in file #warning: no result yet
