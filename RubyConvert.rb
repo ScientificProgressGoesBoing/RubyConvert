@@ -52,14 +52,34 @@ dict_file.each do |line|
 	dict.push({line.gsub(/(^.{#{NUM}})(.*$)/, '\1').strip => line.gsub(/(^.{#{NUM}}\s*#{DICT_SEP})(.*$)/, '\2').strip})
 end
 
-puts dict
 
-#convert
+#convert / lookup
+result = Array.new
+i = 0
+j = 0
 
+arr.each do |a|
+	i += 1 unless j == 0
+	result[i] = Array.new
+	a.each do |ds|
+		ds.each do |k, v|
+			dict.each do |d| 
+				if k then
+					if d.key?(k.strip)												
+					then 	result[i].push(d[k.strip] => v)
+							j += 1
+							break
+					end
+				end
+			end
+		end
+	end
+end
 
+puts result[3]
+arr = nil
 
-
-#write result in file #warning: no result yet
+#write result in file 
 filename = 'conversion.txt'
 regexp = '/^' + BEG + '/'
 File.open("#{filename}", "w+") do |f|
