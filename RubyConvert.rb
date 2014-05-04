@@ -76,16 +76,28 @@ arr.each do |a|
 	end
 end
 
-puts result[3]
 arr = nil
 
 #write result in file 
 filename = 'conversion.txt'
 regexp = '/^' + BEG + '/'
+l = 0
 File.open("#{filename}", "w+") do |f|
-	database.each do |line|
-	f.write("\r\n") if regexp.match(line) and line != database[0] 			
-	f.write(line)	
+	result.each do |set|
+		set.each do |line|
+			line.each do |k,v|
+				if /^###/.match(k) then l += 1 end
+				if /^###/.match(k) and l != 1
+				then 	f.write("\r\n") 
+				end
+				f.write(k)	
+				# if k.length < 4 
+				# then f.write(' ')
+				# end
+				f.write(" \t")
+				f.write(v)
+			end
+		end
 	end
 end
 regexp = nil
